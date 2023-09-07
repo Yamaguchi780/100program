@@ -19,16 +19,16 @@ export const kanaToRoman = function (kana) {
       roman = [...romanMap[firstStr]];
       for (let i=0; i<romanMap[firstStr.slice(0, 1)].length; i++){
         for (let j=0; j<romanMap[firstStr.slice(1)].length; j++){
-          let mergeroma = romanMap[firstStr.slice(0, 1)][i] + romanMap[firstStr.slice(1)][j];
-          roman.push(mergeroma);
+          let mergeroman = romanMap[firstStr.slice(0, 1)][i] + romanMap[firstStr.slice(1)][j];
+          roman.push(mergeroman);
         }
       }
     } else {//表せない時
       roman = [];//それぞれのromanMapを全通り足し合わせる
       for (let i=0; i<romanMap[firstStr.slice(0, 1)].length; i++){
         for (let j=0; i<romanMap[firstStr.slice(1)].length; j++){
-          let mergeroma = romanMap[firstStr.slice(0, 1)][i] + romanMap[firstStr.slice(1)][j];
-          roman.push(mergeroma);
+          let mergeroman = romanMap[firstStr.slice(0, 1)][i] + romanMap[firstStr.slice(1)][j];
+          roman.push(mergeroman);
         }
       }
     }
@@ -76,7 +76,7 @@ export const kanaToRoman = function (kana) {
     'ー': ['-'], '、': [','], '。': ['.'], '・': ['/'], '！': ['!'], '？':['?']
   };
 
-  while (AllStr) { //日本語文が存在する限り続く
+  function toRoman(){
     let firstStr = cutting(); //一文字目
     let next = romanMap[AllStr.slice(0, 1)]; //次の文字のローマ字
     if (!romanMap[firstStr]){
@@ -93,8 +93,8 @@ export const kanaToRoman = function (kana) {
         roman = [...romanMap[firstStr].map(str => str.slice(0, 1) + str)]; //後ろの文字の子音をひとつ増やしたものを追加
         for (let i=0; i<romanMap['っ'].length; i++){//省略しない場合も
           for (let j=0; j<romanMap[firstStr].length; j++){
-            let mergeroma = romanMap['っ'][i] + romanMap[firstStr][j];
-            roman.push(mergeroma);
+            let mergeroman = romanMap['っ'][i] + romanMap[firstStr][j];
+            roman.push(mergeroman);
           }
         }
       }
@@ -105,16 +105,28 @@ export const kanaToRoman = function (kana) {
       } else if (firstStr === 'ん') { //n一つで完了させない処理（省略禁止）
         if (!AllStr) {
           roman = ['nn', 'xn'];
-        } else {
-          if (next[0].match(/^[aiueony]/)) {
+        } else if (next[0].match(/^[aiueony]/)){
             roman = ['nn', 'xn'];
-          };
-          roman = romanMap[firstStr];
-        }
+          } else {
+            let subRoman = romanMap[firstStr];
+            toRoman();
+            let subRoman2 = [];
+            for (let i=0; i<subRoman.length; i++){
+              for (let j=0; j<roman.length; j++){
+                let mergeroma = subRoman[i] + roman[j];
+                subRoman2.push(mergeroma);
+              }
+            }
+            roman = subRoman2;
+          }
       } else{
         roman = romanMap[firstStr];
       } 
     }
+  }
+
+  while (AllStr) { //日本語文が存在する限り続く
+    toRoman();
     AllRoman.push(roman);
   }
   return AllRoman;
