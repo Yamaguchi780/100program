@@ -15,7 +15,7 @@ export const TypingTimer = ({ onUpdate }) => {
     }, 10);
 
     return () => clearInterval(interval);
-   }, []);
+   }, [onUpdate]);
 
    return (
     <div>

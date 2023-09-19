@@ -1,23 +1,37 @@
-import {NavLink,useParams,useLocation,useNavigate} from "react-router-dom";
-import React, {useRef, useState, useEffect, KeyboardEvent} from 'react' ;
+import {useNavigate} from "react-router-dom";
+import React, {useState, useEffect, useCallback} from 'react' ;
 import './play.css';
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { kanaToRoman } from "./kanaToRoman";
 import { colorTyped } from "./colorTyped";
 import { TypingTimer } from "./timer";
 import { anime_word_list } from "./words";
-
+import { norenImage } from "../images/header.png"; 
+import { jutemu } from "../images/jute-mu.png";
+import { momomoti } from "../images/momomoti.png"
+import { azukiMattya }  from "../images/azukiMattya.png"
+import { raisyunn } from "../images/raisyunn.png"
+import { suiu } from "../images/suiu-.png"
+import { riri } from "../images/riri-.png" ;
   
 export const Play = () => {
-    
-  //ページを変えても値を受け渡すやつ
-  const search = useLocation().search;
-  const query2 = new URLSearchParams(search);
+
+  const anime_word_list = 
+  [['ヒカリ堂のあずき抹茶ケーキ', 'ひかりどうのあずきまっちゃのけーき',azukiMattya],
+  ['ヒカリ堂のモモもち','ひかりどうのもももち',momomoti],
+  ['本格たまごケーキ ジュテーム','じゅてーむ',jute-mu],
+  ['本格冷凍焼きそば らいしゅん','らいしゅん',raisyunn],
+  ['子供も使える手洗い石鹸 リリー','りりー',riri],
+  ['フランスのクッキー スィウー','suiu-',suiu],
+  ['元気いっぱいビタミンブレッド','げんきいっぱいびたみんぶれっど',suiu],
+  ['菊水の讃岐うどん','きくすいのさぬきうどん',suiu],
+  ];
+
   
   let list_length = anime_word_list.length;
   const randomNumber = Math.floor(Math.random()*list_length);
   let allRoman = kanaToRoman(anime_word_list[randomNumber][1]);
   let idx1 = allRoman.length;
+  let html = "";
 
   const initialListState = {
     i1 : allRoman.length,//取得リストの長さ
@@ -30,6 +44,7 @@ export const Play = () => {
   const initialShowList = {
     title: anime_word_list[randomNumber][0],
     jaTitle: anime_word_list[randomNumber][1],
+    img :anime_word_list[randomNumber][2],
     a: kanaToRoman(anime_word_list[randomNumber][1])
   };
   const [showList, setShowList] = useState(initialShowList);//表示用
@@ -58,7 +73,7 @@ export const Play = () => {
     });
   };
 
-  const Judgement = (event,list, showList) => {
+  const Judgement = useCallback((event,list, showList) => {
     let allRoman = showList.a;
     let idx1 = list.i1;
     let idx2 = list.i2;
@@ -118,15 +133,15 @@ export const Play = () => {
       console.log(showList);
       setList(newList); 
     } 
-  };
+  }, [historyList, missCounted, elapsedTime]);
 
   //resultに変数を送信するよう
   const navigate = useNavigate();
-  const sendDataToAnotherPage = () => {//result画面に表示する用
+  const sendDataToAnotherPage = useCallback(() => {//result画面に表示する用
     const variable1 = historyList;
     const variable2 = missCounted
     navigate(`/result?var1=${variable1}&var2=${variable2}&time=${elapsedTime}`);
-  };
+  }, [historyList, missCounted, elapsedTime]);
 
   //クリックして別の場所に移るためのもの
   const handleClick2 = () => {
@@ -149,18 +164,18 @@ export const Play = () => {
     return () => {
         document.removeEventListener('keydown', handleDocumentKeyDown);
     };
-}, [list, showList]);
+}, [list, showList, Judgement]);
   
   useEffect(() => {
     const updateHTML = colorTyped(list, showList);
     setColorTypedOutput(updateHTML);
-  }, [list, showList]);
+  }, [list, showList, Judgement]);
 
   useEffect(() => {
     if (count === 10){
       sendDataToAnotherPage();
     }
-  },[count]);
+  },[count, sendDataToAnotherPage]);
 
   return(
     <div className="StyleSheet.container" onKeyDown={handleKeyDown} tabIndex={0}>
