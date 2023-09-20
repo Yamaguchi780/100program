@@ -13,9 +13,6 @@ import companyExplain from "../images/companyExplain.jpg";
 
 export const Start = () => {
 
-  //ページを変えても値を受け渡すやつ
-  const search = useLocation().search;
-  
   //クリックして別の場所に移るためのもの
   const handleClick1 = () => {
     window.location.href = "/play";

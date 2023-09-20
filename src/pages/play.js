@@ -133,7 +133,7 @@ export const Play = () => {
       console.log(showList);
       setList(newList); 
     } 
-  }, [historyList, missCounted, elapsedTime]);
+  }, [historyList, missCounted, elapsedTime, count, startNewRound]);
 
   //resultに変数を送信するよう
   const navigate = useNavigate();
@@ -141,7 +141,7 @@ export const Play = () => {
     const variable1 = historyList;
     const variable2 = missCounted
     navigate(`/result?var1=${variable1}&var2=${variable2}&time=${elapsedTime}`);
-  }, [historyList, missCounted, elapsedTime]);
+  }, [historyList, missCounted, elapsedTime, navigate]);
 
   //クリックして別の場所に移るためのもの
   const handleClick2 = () => {

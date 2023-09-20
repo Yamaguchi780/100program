@@ -9,9 +9,6 @@ import ToTitleImage from "../images/ToTitle.jpg";
 
 export const Result = () => {
 
-  //ページを変えても値を受け渡すやつ
-  const search = useLocation().search;
-
   //couponに変数を送信するよう
   const navigate = useNavigate();
   const sendDataToAnotherPage = () => {//coupon画面に表示する用 改　
