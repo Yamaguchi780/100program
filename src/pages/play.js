@@ -4,14 +4,16 @@ import './play.css';
 import { kanaToRoman } from "./kanaToRoman";
 import { colorTyped } from "./colorTyped";
 import { TypingTimer } from "./timer";
-import { anime_word_list } from "./words";
 import norenImage from "../images/header.png"; 
 import jutemu from "../images/jute-mu.png";
-import momomoti from "../images/momomoti.png"
-import azukiMattya from "../images/azukiMattya.png"
-import raisyunn from "../images/raisyunn.png"
-import suiu from "../images/suiu-.png"
+import momomoti from "../images/momomoti.png";
+import azukiMattya from "../images/azukiMattya.png";
+import raisyunn from "../images/raisyunn.png";
+import suiu from "../images/suiu-.png";
 import riri from "../images/riri-.png" ;
+import sanuki from "../images/Sanuki.png";
+import bitamin from '../images/bitaminBread.png';
+
   
 export const Play = () => {
 
@@ -22,16 +24,14 @@ export const Play = () => {
   ['本格冷凍焼きそば らいしゅん','らいしゅん',raisyunn],
   ['子供も使える手洗い石鹸 リリー','りりー',riri],
   ['フランスのクッキー スィウー','suiu-',suiu],
-  ['元気いっぱいビタミンブレッド','げんきいっぱいびたみんぶれっど',suiu],
-  ['菊水の讃岐うどん','きくすいのさぬきうどん',suiu],
+  ['元気いっぱいビタミンブレッド','げんきいっぱいびたみんぶれっど',bitamin],
+  ['菊水の讃岐うどん','きくすいのさぬきうどん',sanuki],
   ];
 
-  
   let list_length = anime_word_list.length;
   const randomNumber = Math.floor(Math.random()*list_length);
   let allRoman = kanaToRoman(anime_word_list[randomNumber][1]);
   let idx1 = allRoman.length;
-  let html = "";
 
   const initialListState = {
     i1 : allRoman.length,//取得リストの長さ
@@ -179,12 +179,12 @@ export const Play = () => {
 
   return(
     <div className="StyleSheet.container" onKeyDown={handleKeyDown} tabIndex={0}>
+      <header className='header'><img src={norenImage} alt="ヘッダー"/></header>
       <TypingTimer onUpdate={(time) => setElapsedTime(time)} />
-      <div>{showList.title}</div>
-      <div>{showList.jaTitle}</div>
+      <div className="Title">{showList.title}</div>
+      <div className="hurigana">{showList.jaTitle}</div>
       <div dangerouslySetInnerHTML={{__html: colorTypedOutput }}/>
-      <button onClick={() => startNewRound()} id="hai">Next Round</button>
-      <button onClick={() => {handleClick2()}} id="hai">resultへ</button> 
+      <div><img className="image" src={showList.img} alt={showList.img}/></div>
     </div>
   );
 }

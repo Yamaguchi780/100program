@@ -29,7 +29,7 @@ export const Start = () => {
       <div className='scroll'><img src={scrollImage} alt="スクロール"/><br/></div>
       <div className='explain'>
         <div>
-          <img className='explainTitleImg' alt="説明画面タイトル" src={explainTitleImage}/>
+          <img className='explainTitleImg' src={explainTitleImage} alt="説明画面タイトル" />
           <p><img className="explainImg" src={explainImage} alt="説明"/></p>
         </div>
         <div><img className='typingImg' src={typingImage} alt="タイピング"/></div>
