@@ -1,10 +1,12 @@
+import {useHistory} from "react-router-dom";
 import './company.css';
 
 export const Company = () => {
+  const history = useHistory();
 
   //クリックして別の場所に移るためのもの
   const handleClick = () => {
-    window.location.href = "/start";
+    history.push("/start");
   }
 
   return(

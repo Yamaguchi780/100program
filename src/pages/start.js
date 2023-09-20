@@ -1,4 +1,4 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useHistory} from "react-router-dom";
 import './start.css';
 import norenImage from "../images/header.png";
 import titleImage from "../images/title.jpg";
@@ -12,10 +12,11 @@ import companyTitle from "../images/companyTitle.jpg";
 import companyExplain from "../images/companyExplain.jpg";
 
 export const Start = () => {
+  const history = useHistory();
 
   //クリックして別の場所に移るためのもの
   const handleClick1 = () => {
-    window.location.href = "/play";
+    history.push("/play");
   }
 
   return(

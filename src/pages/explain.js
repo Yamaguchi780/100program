@@ -1,11 +1,12 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useHistory} from "react-router-dom";
 import './explain.css';
 
 export const Explain = () => {
+  const history = useHistory();
 
   //クリックして別の場所に移るためのもの
   const handleClick1 = () => {
-    window.location.href = "/start";
+    history.push("/start");
   }
 
   return(
