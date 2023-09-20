@@ -1,12 +1,12 @@
-import {useLocation, useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import './explain.css';
 
 export const Explain = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   //クリックして別の場所に移るためのもの
   const handleClick1 = () => {
-    history.push("/start");
+    navigate("/start");
   }
 
   return(

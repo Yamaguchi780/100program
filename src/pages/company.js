@@ -1,12 +1,12 @@
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import './company.css';
 
 export const Company = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   //クリックして別の場所に移るためのもの
   const handleClick = () => {
-    history.push("/start");
+    navigate("/start");
   }
 
   return(

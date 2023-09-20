@@ -1,14 +1,14 @@
-import {useLocation, useHistory} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import './coupon.css';
 // import header.png from "../images/header.png";
 // import midoriWaku from "../images/midoriWaku.png";
 // import yen20 from "../images/20yen.png"
 
 export const Coupon  = () => {
-  const history = useHistory(); 
+  const navigate = useNavigate(); 
 
   const handleClick1 = () => {
-    history.push("/start");
+    navigate("/start");
   }
 
    //playから変数を受け取る用

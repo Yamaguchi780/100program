@@ -1,4 +1,4 @@
-import {useLocation,useNavigate, useHistory} from "react-router-dom";
+import {useLocation,useNavigate} from "react-router-dom";
 import './result.css';
 //import sendDataToAnotherPage from "./play.js";
 import norenImage from "../images/header.png";
@@ -18,11 +18,11 @@ export const Result = () => {
    navigate(`/coupon?var1=${variable1}&var2=${variable2}&time=${time}`);
  };
   
- const history = useHistory();
+ const history = useNavigate();
 
   //クリックして別の場所に移るためのもの
   const handleClick3 = () => {
-    history.push("/start");
+    history("/start");
   }
 
   //クリックして別の場所に移るためのもの
