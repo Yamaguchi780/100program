@@ -5,13 +5,13 @@ import { kanaToRoman } from "./kanaToRoman";
 import { colorTyped } from "./colorTyped";
 import { TypingTimer } from "./timer";
 import { anime_word_list } from "./words";
-import { norenImage } from "../images/header.png"; 
-import { jutemu } from "../images/jute-mu.png";
-import { momomoti } from "../images/momomoti.png"
-import { azukiMattya }  from "../images/azukiMattya.png"
-import { raisyunn } from "../images/raisyunn.png"
-import { suiu } from "../images/suiu-.png"
-import { riri } from "../images/riri-.png" ;
+import norenImage from "../images/header.png"; 
+import jutemu from "../images/jute-mu.png";
+import momomoti from "../images/momomoti.png"
+import azukiMattya from "../images/azukiMattya.png"
+import raisyunn from "../images/raisyunn.png"
+import suiu from "../images/suiu-.png"
+import riri from "../images/riri-.png" ;
   
 export const Play = () => {
 
