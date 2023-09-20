@@ -14,22 +14,18 @@ function App() {
 
   return (
     <div className="app">
-    <BrowserRouter>
+    <BrowserRouter basename='/100program'>
       <ul>
       </ul>
       <Routes>
-        <Route activeClassName="active" path="*"element={<Pnf />}/>
-        <Route activeClassName="active" path="/"element={<Start />}/>
-        <Route activeClassName="active" path="/start"element={<Start />}/>
-        <Route activeClassName="active" path="/play"element={<Play />}/>
-        <Route activeClassName="active" path="/result"element={<Result />}/>
-        <Route activeClassName="active" path="/explain"element={<Explain/>}/>
-        <Route activeClassName="active" path="/company"element={<Company/>}/>
-        <Route activeClassName="active" path="/explain"element={<Explain/>}/>
-        <Route activeClassName="active" path="/coupon"element={<Coupon/>}/>
-        <Route path='/play' exact component={Play} />
-        <Route path='/result' component={Result}/>
-        
+        <Route path="*"element={<Pnf />}/>
+        <Route path="/"element={<Start />}/>
+        <Route path="/start"element={<Start />}/>
+        <Route path="/play"element={<Play />}/>
+        <Route path="/result"element={<Result />}/>
+        <Route path="/explain"element={<Explain/>}/>
+        <Route path="/company"element={<Company/>}/>
+        <Route path="/coupon"element={<Coupon/>}/>
       </Routes>
     </BrowserRouter>
   </div>
