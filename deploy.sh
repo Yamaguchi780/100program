@@ -1,9 +1,12 @@
 #!/bin/bash
+export PATH=./node_modules/.bin:$PATH
 
 # エラーが発生した場合にスクリプトを終了
 set -e
 
 # ビルドの実行
+npm install --save-dev @babel/plugin-proposal-private-property-in-object
+
 npm run build
 
 # gh-pages ブランチに移動 (存在しなければ新しく作成)
