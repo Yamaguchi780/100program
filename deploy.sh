@@ -20,7 +20,7 @@ git add -A
 git commit -m "Deploy to gh-pages"
 
 # GitHubにプッシュ
-git push origin gh-pages
+git push origin gh-pages --force
 
 # 元のブランチに戻る
 git checkout yamaguchi
