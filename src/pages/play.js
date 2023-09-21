@@ -54,6 +54,8 @@ export const Play = () => {
   const [count, setCount] = useState(0);//何回目の文章セットか
   const [elapsedTime, setElapsedTime] = useState(0);//タイマー関連
   const [colorTypedOutput, setColorTypedOutput] = useState('');//colorTypedを呼ぶのに用いる本当に必要かは要検討
+  const [isStartNewRound, setIsStartNewRound] = useState(false);
+
 
   const startNewRound = () => {//新しい文章セットの用意
     const newRandomNumber = Math.floor(Math.random() * anime_word_list.length);
@@ -61,6 +63,7 @@ export const Play = () => {
     setShowList({
       title: anime_word_list[newRandomNumber][0],
       jaTitle: anime_word_list[newRandomNumber][1],
+      img :anime_word_list[newRandomNumber][2],
       a: newAllRoman
     });
     setList({
@@ -84,8 +87,7 @@ export const Play = () => {
     let key = event.key;//キーの取得
     console.log(key);
     temp += key;
-  
-    if (key === allRoman[idx2][pattern[idx2]][idx3]){//候補の０番目に合致した時の処理
+    if (key === allRoman[idx2][pattern[idx2]][idx3]){//候補のidx2番目に合致した時の処理
       if (idx3 < allRoman[idx2][pattern[idx2]].length - 1){
         idx3 += 1;
       } else if (idx2 < idx1 - 1){
@@ -93,28 +95,31 @@ export const Play = () => {
         idx3 = 0;//次の項に移るため初期化
         temp = '';//次の項に移るため初期化
       } else {
-        idx3 += 1;//次の項に移るため初期化
+        idx3 = 0;//次の項に移るため初期化
         temp = '';//次の項に移るため初期化
         isStart = false;
         setHistoryList([...historyList, showList.title]);
         setCount(count+1);
-        startNewRound();
       }
     } else if (allRoman[idx2].length > 1) {//候補に合致しないとき別の候補があれば参照
       let reg = new RegExp('^' + temp);
+      let flag = 0;
       for (let i = 0; i < allRoman[idx2].length; i++) {
         if (!!allRoman[idx2][i].match(reg)) {
+          flag += 1;
           pattern[idx2] = i;//合致した時パターン変更
           if (idx3 === allRoman[idx2][pattern[idx2]].length - 1){
             idx3 = 0;
             idx2 += 1;
             temp = '';
           } else  {
-            idx3 = temp.length +1;
+            idx3 = temp.length;
           }
-        } else {
-          temp = temp.slice(0,-1);
+          break;
         }
+      }
+      if (flag===0) {
+        temp = temp.slice(0,-1);
       }
     }else {
       temp = temp.slice(0,-1);
@@ -129,10 +134,12 @@ export const Play = () => {
         tp : temp,//複数候補がある場合の保存用
         iSt : isStart,//falseでゲーム終了
       };
+      setList(newList); 
       console.log(list);
       console.log(showList);
-      setList(newList); 
-    } 
+    } else {
+      setIsStartNewRound(true);
+    }
   }, [historyList, missCounted, elapsedTime, count, startNewRound]);
 
   //resultに変数を送信するよう
@@ -141,18 +148,20 @@ export const Play = () => {
     const variable1 = historyList;
     const variable2 = missCounted
     navigate(`/result?var1=${variable1}&var2=${variable2}&time=${elapsedTime}`);
-  }, [historyList, missCounted, elapsedTime, navigate]);
-
-  //クリックして別の場所に移るためのもの
-  const handleClick2 = () => {
-    sendDataToAnotherPage();
-  }
+  }, [historyList, missCounted, navigate]);
 
   const handleKeyDown = (event) => {
     if (!event.repeat){
       Judgement(event,list,showList);
     }
   }
+
+  useEffect(() => {
+    if (isStartNewRound) {
+        startNewRound();
+        setIsStartNewRound(false); // 状態をリセット
+    }
+  }, [isStartNewRound]);
 
   useEffect(() => {
     const handleDocumentKeyDown = (event) => {
@@ -184,7 +193,7 @@ export const Play = () => {
       <div className="Title">{showList.title}</div>
       <div className="hurigana">{showList.jaTitle}</div>
       <div dangerouslySetInnerHTML={{__html: colorTypedOutput }}/>
-      <div><img className="image" src={showList.img} alt={showList.img}/></div>
+      <div><img className="image" src={showList.img} alt="商品画像"/></div>
     </div>
   );
 }
