@@ -88,14 +88,25 @@ export const kanaToRoman = function (kana) {
         if (isSmallChar()) {//後ろが小さい文字の時
           firstStr += cutting();
           SmallChar(firstStr);
-        };
-        roman = [...romanMap[firstStr].map(str => str.slice(0, 1) + str)]; //後ろの文字の子音をひとつ増やしたものを追加
-        for (let i=0; i<romanMap['っ'].length; i++){//省略しない場合も
-          for (let j=0; j<romanMap[firstStr].length; j++){
-            let mergeRoman = romanMap['っ'][i] + romanMap[firstStr][j];
-            roman.push(mergeRoman);
+          const tempRoman = [...roman];//SmallCharの結果を保存
+          let mergeRoman2 = tempRoman.map(str => str.slice(0,1) + str);
+          roman = romanMap[firstStr].map(str => str.slice(0, 1) + str).concat(mergeRoman2);
+          for (let i=0; i<romanMap['っ'].length; i++){//省略しない場合も
+            for (let j=0; j<tempRoman.length; j++){
+              let mergeRoman = romanMap['っ'][i] + tempRoman[j];
+              roman.push(mergeRoman);
+            }
+          }
+        } else{
+          roman = [...romanMap[firstStr].map(str => str.slice(0, 1) + str)]; //後ろの文字の子音をひとつ増やしたものを追加
+          for (let i=0; i<romanMap['っ'].length; i++){//省略しない場合も
+            for (let j=0; j<romanMap[firstStr].length; j++){
+              let mergeRoman = romanMap['っ'][i] + romanMap[firstStr][j];
+              roman.push(mergeRoman);
+            }
           }
         }
+        roman = [...new Set(roman)];
       }
     } else {//小さな「つ」以外
       if (isSmallChar()) { //後ろが小さい文字の時
