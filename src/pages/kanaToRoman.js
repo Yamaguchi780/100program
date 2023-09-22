@@ -13,25 +13,57 @@ export const kanaToRoman = function (kana) {
     return !!AllStr.slice(0, 1).match(/^[ぁぃぅぇぉゃゅょ]$/);
   }
 
-  function SmallChar(firstStr){
-    if (romanMap[firstStr]){//後ろまで見て一塊で表せる時
-      roman = [...romanMap[firstStr]];
-      for (let i=0; i<romanMap[firstStr.slice(0, 1)].length; i++){
-        for (let j=0; j<romanMap[firstStr.slice(1)].length; j++){
-          let mergeRoman = romanMap[firstStr.slice(0, 1)][i] + romanMap[firstStr.slice(1)][j];
-          roman.push(mergeRoman);
+  function splitStrings(str) {
+    let results = [];
+    for (let i = 1; i <= str.length; i++) {
+        let firstPart = str.slice(0, i);
+        let rest = str.slice(i);
+        if (rest) {
+            let restSplits = splitStrings(rest);
+            for (let restSplit of restSplits) {
+                results.push([firstPart, ...restSplit]);
+            }
+        } else {
+            results.push([firstPart]);
         }
-      }
-    } else {//表せない時
-      roman = [];//それぞれのromanMapを全通り足し合わせる
-      for (let i=0; i<romanMap[firstStr.slice(0, 1)].length; i++){
-        for (let j=0; i<romanMap[firstStr.slice(1)].length; j++){
-          let mergeRoman = romanMap[firstStr.slice(0, 1)][i] + romanMap[firstStr.slice(1)][j];
-          roman.push(mergeRoman);
-        }
-      }
     }
+    return results;
+}
+
+function SmallChar(firstStr) {
+  let allSplits = splitStrings(firstStr);
+  let singleRomans = [];      // 単一のローマ字結果を格納する配列
+  let combinedRomans = [];    // 複合ローマ字結果を格納する配列
+
+  for (let splitSet of allSplits) {
+      let currentCombinations = [''];
+      for (let split of splitSet) {
+          if (!romanMap[split]) {
+              currentCombinations = [];
+              break;
+          }
+          let newCombinations = [];
+          for (let current of currentCombinations) {
+              for (let roman of romanMap[split]) {
+                  newCombinations.push(current + roman);
+              }
+          }
+          currentCombinations = newCombinations;
+      }
+      
+      // 結果が単一のローマ字である場合と複合ローマ字である場合を分けて格納
+      for (let romanCombination of currentCombinations) {
+          if (splitSet.length === 1) {
+              singleRomans.push(romanCombination);
+          } else {
+              combinedRomans.push(romanCombination);
+          }
+      }
   }
+
+  // 単一のローマ字結果を先に、次に複合ローマ字結果を追加
+  roman = singleRomans.concat(combinedRomans);
+}
 
   const romanMap = { //対応表
     'あ': ['a'], 'い': ['i', 'yi'], 'う': ['u', 'wu'], 'え': ['e'], 'お': ['o'],

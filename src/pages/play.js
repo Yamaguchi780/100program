@@ -150,12 +150,6 @@ export const Play = () => {
     navigate(`/result?var1=${variable1}&var2=${variable2}&time=${elapsedTime}`);
   }, [historyList, missCounted, navigate]);
 
-  const handleKeyDown = (event) => {
-    if (!event.repeat){
-      Judgement(event,list,showList);
-    }
-  }
-
   useEffect(() => {
     if (isStartNewRound) {
         startNewRound();
@@ -187,7 +181,7 @@ export const Play = () => {
   },[count, sendDataToAnotherPage]);
 
   return(
-    <div className="StyleSheet.container" onKeyDown={handleKeyDown} tabIndex={0}>
+    <div className="StyleSheet.container">
       <header className='header'><img src={norenImage} alt="ヘッダー"/></header>
       <TypingTimer onUpdate={(time) => setElapsedTime(time)} />
       <div className="Title">{showList.title}</div>
