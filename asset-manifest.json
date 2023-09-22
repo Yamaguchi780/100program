@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/100program/static/css/main.cc73f3fc.css",
+    "main.js": "/100program/static/js/main.ff6411b4.js",
+    "static/js/787.2cb3f593.chunk.js": "/100program/static/js/787.2cb3f593.chunk.js",
+    "static/media/jute-mu.png": "/100program/static/media/jute-mu.5d5da03b0b9518cc932b.png",
+    "static/media/suiu-.png": "/100program/static/media/suiu-.192095a28d2efc751fb5.png",
+    "static/media/momomoti.png": "/100program/static/media/momomoti.f9e9e3a7719bced30127.png",
+    "static/media/Sanuki.png": "/100program/static/media/Sanuki.ce17b1f76b73325300a5.png",
+    "static/media/bitaminBread.png": "/100program/static/media/bitaminBread.d2c181f783a51f2f78e9.png",
+    "static/media/raisyunn.png": "/100program/static/media/raisyunn.b731de66ecbada197586.png",
+    "static/media/azukiMattya.png": "/100program/static/media/azukiMattya.9bc662c23f7d0e706111.png",
+    "static/media/riri-.png": "/100program/static/media/riri-.a1e6a8bfb9b2e1690051.png",
+    "static/media/title.jpg": "/100program/static/media/title.40cce9b6e8b2b982ea18.jpg",
+    "static/media/arigatou.jpg": "/100program/static/media/arigatou.e2575c1bc89636adcb78.jpg",
+    "static/media/explain.jpg": "/100program/static/media/explain.76d43da06c2252015a09.jpg",
+    "static/media/typingImg.jpg": "/100program/static/media/typingImg.960e7f21b950dd35ffe9.jpg",
+    "static/media/explainTitrunle.jpg": "/100program/static/media/explainTitrunle.9fe28c71799b4788790d.jpg",
+    "static/media/companyExplain.jpg": "/100program/static/media/companyExplain.92bffbc180d04053b280.jpg",
+    "static/media/yazirushiExplain.jpg": "/100program/static/media/yazirushiExplain.58b8212fc3082b972714.jpg",
+    "static/media/companyTitle.jpg": "/100program/static/media/companyTitle.313283350fcd46c3666b.jpg",
+    "static/media/playbutton_2.png": "/100program/static/media/playbutton_2.a7988e7c763b1a6669cd.png",
+    "static/media/ToTitle.jpg": "/100program/static/media/ToTitle.02e084e12cc9f4ba5ac2.jpg",
+    "static/media/title2.jpg": "/100program/static/media/title2.822c036926ea8e0ffaee.jpg",
+    "index.html": "/100program/index.html",
+    "main.cc73f3fc.css.map": "/100program/static/css/main.cc73f3fc.css.map",
+    "main.ff6411b4.js.map": "/100program/static/js/main.ff6411b4.js.map",
+    "787.2cb3f593.chunk.js.map": "/100program/static/js/787.2cb3f593.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cc73f3fc.css",
+    "static/js/main.ff6411b4.js"
+  ]
+}
